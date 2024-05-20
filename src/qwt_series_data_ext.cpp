@@ -1,6 +1,6 @@
 #include "qwt_series_data_ext.hpp"
 
-#include <qwt_series_data.h>
+#include <qwt/qwt_series_data.h>
 
 namespace player {
 

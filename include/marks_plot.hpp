@@ -5,8 +5,8 @@
 
 #include "qwt_point_ext.hpp"
 
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
+#include <qwt/qwt_plot.h>
+#include <qwt/qwt_plot_curve.h>
 
 #include <QLabel>
 

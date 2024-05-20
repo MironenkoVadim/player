@@ -3,8 +3,8 @@
 #ifndef QWT_PLOT_PICKER_EXT_HPP_
 #define QWT_PLOT_PICKER_EXT_HPP_
 
-#include <qwt_plot_canvas.h>
-#include <qwt_plot_picker.h>
+#include <qwt/qwt_plot_canvas.h>
+#include <qwt/qwt_plot_picker.h>
 
 namespace player {
 

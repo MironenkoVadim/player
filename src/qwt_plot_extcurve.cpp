@@ -1,8 +1,8 @@
 #include "qwt_plot_extcurve.hpp"
 #include "qwt_series_data_ext.hpp"
 
-#include <qwt_painter.h>
-#include <qwt_scale_map.h>
+#include <qwt/qwt_painter.h>
+#include <qwt/qwt_scale_map.h>
 
 #include <memory>
 

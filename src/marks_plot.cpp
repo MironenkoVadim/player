@@ -2,15 +2,15 @@
 #include "qwt_plot_extcurve.hpp"
 #include "qwt_series_data_ext.hpp"
 
-#include <qwt_painter.h>
-#include <qwt_plot.h>
-#include <qwt_plot_canvas.h>
-#include <qwt_plot_curve.h>
-#include <qwt_plot_directpainter.h>
-#include <qwt_plot_layout.h>
-#include <qwt_scale_draw.h>
-#include <qwt_scale_widget.h>
-#include <qwt_symbol.h>
+#include <qwt/qwt_painter.h>
+#include <qwt/qwt_plot.h>
+#include <qwt/qwt_plot_canvas.h>
+#include <qwt/qwt_plot_curve.h>
+#include <qwt/qwt_plot_directpainter.h>
+#include <qwt/qwt_plot_layout.h>
+#include <qwt/qwt_scale_draw.h>
+#include <qwt/qwt_scale_widget.h>
+#include <qwt/qwt_symbol.h>
 
 namespace player {
 
@@ -125,10 +125,6 @@ void MarksPlot::appendPoint( const QwtPointExt& point )
 		m_directPainter->setClipRegion( clipRegion );
 	}
 	replot();
-
-//	m_directPainter->drawSeries( m_curve,
-//								 static_cast< int >( curveData->size() - 1 ),
-//								 static_cast< int >( curveData->size() - 1 ) );
 } // MarksPlot::appendPoint
 
 

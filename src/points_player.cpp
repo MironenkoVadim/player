@@ -1,6 +1,6 @@
 #include "main_window.hpp"
 
-#include <qwt_picker_machine.h>
+#include <qwt/qwt_picker_machine.h>
 
 namespace player {
 
@@ -14,14 +14,17 @@ PointsPlayer::PointsPlayer( QWidget* parent ) :
 	defaultSettings();
 	createInfoModel();
 
-	m_timerCurrent = new QTimer( this );
 	setupConnections();
+
+	connect( startButton, &QPushButton::clicked, &m_exportPoint, &GeneratePoint::commandFromUI );
+	connect( &m_exportPoint, &GeneratePoint::signalPoint, this,  &PointsPlayer::drawPoints );
+    connect( stopButton, &QPushButton::clicked, &m_exportPoint,  &GeneratePoint::quit );
+    qDebug() << "MainWindow thread: " << QThread::currentThread();
 }
 
 
 PointsPlayer::~PointsPlayer()
 {
-	m_timerCurrent->deleteLater();
 	delete m_modelTable;
 }
 
@@ -45,8 +48,6 @@ void PointsPlayer::setupConnections()
 	connect( infoTableView->horizontalHeader(), QOverload< int >::of( &QHeaderView::sectionClicked ), [=]( int index ) {
 		m_modelTable->sort( infoTableView->horizontalHeader()->sortIndicatorSection(), infoTableView->horizontalHeader()->sortIndicatorOrder() );
 	} );
-
-	connect( m_timerCurrent, &QTimer::timeout, this, &PointsPlayer::drawPoints );
 } // PointsPlayer::setupConnections
 
 
@@ -147,12 +148,8 @@ void PointsPlayer::updateMin( MarksPlot* plot, QSpinBox* min, QSpinBox* max )
 } // PointsPlayer::updateMin
 
 
-void PointsPlayer::drawPoints()
+void PointsPlayer::drawPoints( const QPointF& point )
 {
-	QPointF point;
-	point.setX( rand() % 100 );
-	point.setY( rand() % 100 );
-
 	double velocityColor = point.x() / 100.0 + 0.5F;
 	double sizeMarks     = point.x() / 10.0;
 
@@ -266,19 +263,20 @@ void PointsPlayer::splitter()
 
 void PointsPlayer::on_startButton_clicked()
 {
-	m_timerCurrent->start( 1000 );
+	m_exportPoint.setRunning( true );
 }
 
 
 void PointsPlayer::on_pauseButton_clicked()
 {
-	m_timerCurrent->stop();
+	m_exportPoint.setRunning( false );
 }
 
 
 void PointsPlayer::on_stopButton_clicked()
 {
-	m_timerCurrent->stop();
+	m_exportPoint.setRunning( false );
+
 	m_plotAzimuth->clearPoints();
 	m_plotDistance->clearPoints();
 	m_rowNumber = 0;

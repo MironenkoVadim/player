@@ -5,9 +5,9 @@
 
 #include "qwt_point_ext.hpp"
 
-#include <qwt_plot_seriesitem.h>
-#include <qwt_series_data.h>
-#include <qwt_color_map.h>
+#include <qwt/qwt_plot_seriesitem.h>
+#include <qwt/qwt_series_data.h>
+#include <qwt/qwt_color_map.h>
 
 namespace player {
 

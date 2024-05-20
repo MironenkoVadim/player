@@ -3,6 +3,8 @@
 #ifndef POINTSPLAYER_HPP_
 #define POINTSPLAYER_HPP_
 
+#include "generate_point.hpp"
+
 #include "marks_plot.hpp"
 #include "qwt_plot_picker_ext.hpp"
 
@@ -10,6 +12,7 @@
 #include "ui_points_player.h"
 
 #include <QTimer>
+#include <QThread>
 #include <QStandardItemModel>
 
 namespace player {
@@ -35,10 +38,14 @@ private slots:
 	void updateMax( MarksPlot* plot, QSpinBox* min, QSpinBox* max );
 	void updateMin( MarksPlot* plot, QSpinBox* min, QSpinBox* max );
 
+signals:
+	void signalNewPoint();
+
 private:
 	void createInfoModel();
 	void defaultSettings();
-	void drawPoints();
+	void drawPoints( const QPointF& point );
+
 	void splitter();
 	void spinboxSize();
 	void visiblePeriodsUpdate( MarksPlot* plot, QSpinBox* sb );
@@ -46,10 +53,12 @@ private:
 private:
 	int m_rowNumber { 0 };
 
+	QPointF m_currPoint;
+
+	GeneratePoint m_exportPoint;
+
 	MarksPlot* m_plotDistance;
 	MarksPlot* m_plotAzimuth;
-
-	QTimer* m_timerCurrent;
 
 	QStandardItemModel* m_modelTable;
 

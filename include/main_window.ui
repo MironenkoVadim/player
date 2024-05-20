@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>QPlotter</string>
+   <string>Player</string>
   </property>
   <widget class="QWidget" name="cw">
    <layout class="QHBoxLayout" name="horizontalLayout">

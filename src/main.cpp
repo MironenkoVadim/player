@@ -20,6 +20,7 @@ int main( int argc, char* argv[] )
 
 	player::MainWindow mw;
 	mw.show();
+	app.processEvents();
 	return( app.exec() );
 } // main
 
